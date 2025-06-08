@@ -44,7 +44,7 @@ namespace Application.Services
         private void ValidateTask(ReadingTask task)
         {
             if (task == null) throw new ArgumentNullException("Invalid data!");
-            if (task.DueDate == null) throw new ArgumentNullException("Invalid due date!");
+            if (task.DueDate == null || task.DueDate < DateTime.Now) throw new ArgumentException("Invalid due date!");
             if (task.Book.Title == null) throw new ArgumentNullException("Invalid book title!");
             if (task.Book.Author == null) throw new ArgumentNullException("Invalid book author!");
         }

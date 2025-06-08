@@ -1,17 +1,18 @@
-﻿ @model AccountRegister
+﻿@model AccountRegister
 @{
     ViewData["Title"] = "Register";
 }
 
-<h1>Register</h1>
-<hr />
+<h1 class="mb-4 text-center">Register</h1>
 
 @Html.Partial("_Alert")
 
-<div class="row">
-    <div class="col-md-4">
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
         <form asp-controller="User" asp-action="Register" method="post" enctype="multipart/form-data" novalidate>
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
             <div class="mb-3">
                 <label asp-for="Image" class="form-label">New Profile Picture</label>
@@ -19,33 +20,31 @@
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="Username" class="form-label">Username:</label>
+            <div class="mb-3">
+                <label asp-for="Username" class="form-label">Username</label>
                 <input asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="Email" class="form-label">Email:</label>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">Email</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="Password" class="form-label">Password:</label>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Password</label>
                 <input asp-for="Password" type="password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="ConfirmPassword" class="form-label">Confirm Password:</label>
+            <div class="mb-3">
+                <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
                 <input asp-for="ConfirmPassword" type="password" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-primary w-100" />
-            </div>
+            <button type="submit" class="btn btn-primary w-100">Register</button>
         </form>
     </div>
 </div>

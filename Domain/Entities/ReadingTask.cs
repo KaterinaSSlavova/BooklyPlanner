@@ -14,5 +14,19 @@
 
         public int BookId { get; set; }
         public Book? Book { get; set; }
+
+        public ReadingTask(DateTime dueDate, Book book)
+        {
+            this.DueDate = dueDate;
+            this.Book = book; 
+            this.CreatedAt = DateTime.UtcNow;
+            this.IsArchived = false;
+            this.IsCompleted = false;  
+        }
+
+        public ReadingTask()
+        {
+            
+        }
     }
 }

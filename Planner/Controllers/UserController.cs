@@ -76,7 +76,7 @@ namespace Planner.Controllers
 		public IActionResult LogOut()
 		{
 			HttpContext.Session.Clear();
-			return RedirectToAction("LogIn", "User");
+			return RedirectToAction("LogInForm", "User");
 		}
 	}
 }

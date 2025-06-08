@@ -1,8 +1,90 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<ReadingTaskViewModel>
+
+@{
+    ViewData["Title"] = "My Tasks";
+    var activeTasks = Model.Where(t => !t.IsCompleted).ToList();
+    var completedTasks = Model.Where(t => t.IsCompleted).ToList();
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h2 class="mb-4">My Tasks</h2>
+@Html.Partial("_Alert")
+
+<ul class="nav nav-pills mb-3" id="task-tabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="active-tab" data-bs-toggle="pill" data-bs-target="#active" type="button" role="tab">
+        <i class="bi bi-circle-fill text-success me-1"></i> Active Tasks
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="completed-tab" data-bs-toggle="pill" data-bs-target="#completed" type="button" role="tab">
+            <i class="bi bi-check-circle-fill text-success me-1"></i>  Completed Tasks
+        </button>
+    </li>
+</ul>
+
+<div class="tab-content" id="task-tabContent">
+    <div class="tab-pane fade show active" id="active" role="tabpanel">
+        <table class="table table-hover mt-2">
+            <thead class="table-light">
+                <tr>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Due Date</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var task in activeTasks)
+                {
+                    <tr>
+                        <td>@task.Book?.Image</td>
+                        <td>@task.Book?.Title</td>
+                        <td>@task.DueDate?.ToShortDateString()</td>
+                        <td>@task.CreatedAt.ToShortDateString()</td>
+                        <td>
+                            <form asp-controller="Home" asp-action="MarkAsComplete" method="post" asp-route-id="@task.Id" class="d-inline">
+                                <button type="submit" class="btn btn-success btn-sm">Complete</button>
+                            </form>
+                            <form asp-controller="Home" asp-action="Archive" method="post" asp-route-id="@task.Id" class="d-inline ms-1">
+                                <button type="submit" class="btn btn-warning btn-sm">Archive</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tab-pane fade" id="completed" role="tabpanel">
+        <table class="table table-bordered mt-2">
+            <thead class="table-light">
+                <tr>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Due Date</th>
+                    <th>Created</th>
+                    <th>Completed</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var task in completedTasks)
+                {
+                    <tr>
+                        <td>@task.Book?.Image</td>
+                        <td>@task.Book?.Title</td>
+                        <td>@task.DueDate?.ToShortDateString()</td>
+                        <td>@task.CreatedAt.ToShortDateString()</td>
+                        <td>@task.CompletedAt?.ToShortDateString()</td>
+                        <td>
+                            <form asp-controller="Home" asp-action="Archive" method="post" asp-route-id="@task.Id" class="d-inline ms-1">
+                                <button type="submit" class="btn btn-warning btn-sm">Archive</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

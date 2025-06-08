@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -20,6 +21,7 @@ namespace Infrastructure.Repositories
         public List<ReadingTask> GetUserTasks(int userId)
         {
             return _context.ReadingTasks
+                .Include(t => t.Book)
                 .Where(t => t.UserId ==  userId && t.IsArchived == false)
                 .ToList();
         }

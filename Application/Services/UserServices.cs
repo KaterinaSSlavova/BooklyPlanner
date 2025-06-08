@@ -8,9 +8,11 @@ namespace Application.Services
     public class UserServices: IUserService
     {
         private readonly IUserRepository _userRepository;
-        public UserServices(IUserRepository userRepository)
+        private readonly IHttpContextAccessor _contextAccessor;
+        public UserServices(IUserRepository userRepository, IHttpContextAccessor httpContext)
         {
              _userRepository = userRepository;
+            _contextAccessor = httpContext;
         }
 
         public void Register(User user)
@@ -26,6 +28,7 @@ namespace Application.Services
                 throw new ArgumentException($"User with username '{loggingUser.Username}' was not found!");
             if(storedUser.Password != loggingUser.Password)
                 throw new ArgumentException($"Wrong password! Please try again!");
+            _contextAccessor.HttpContext.Session.SetInt32("UserId", storedUser.Id);
         }
 
         public string ConvertToString(IFormFile image)
