@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Planner", "Planner\Planner.csproj", "{6CF1BE81-1330-49CB-BED2-3F81CC5FC8C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Planner", "Planner\Planner.csproj", "{6CF1BE81-1330-49CB-BED2-3F81CC5FC8C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{B80DD3F0-DED0-4706-A9AE-02AC7E90A1B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{B80DD3F0-DED0-4706-A9AE-02AC7E90A1B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{3D726810-2374-4D5D-B962-33DA32E09F22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{3D726810-2374-4D5D-B962-33DA32E09F22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{388D2783-6E09-47D4-A388-FCD7CACF3163}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{3D726810-2374-4D5D-B962-33DA32E09F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D726810-2374-4D5D-B962-33DA32E09F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D726810-2374-4D5D-B962-33DA32E09F22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{388D2783-6E09-47D4-A388-FCD7CACF3163}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{388D2783-6E09-47D4-A388-FCD7CACF3163}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{388D2783-6E09-47D4-A388-FCD7CACF3163}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{388D2783-6E09-47D4-A388-FCD7CACF3163}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,7 +8,11 @@ namespace Infrastructure
     {
         public void Configure(EntityTypeBuilder<User> entity)
         {
-            entity.HasKey(b => b.Id);
+            entity.HasKey(u => u.Id);
+
+            entity.HasIndex(u => u.Username).IsUnique();
+
+            entity.HasIndex(u => u.Email).IsUnique();
 
             entity.HasMany(u => u.ReadingTasks)
                 .WithOne(t => t.User)

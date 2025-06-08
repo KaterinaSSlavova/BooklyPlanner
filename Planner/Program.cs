@@ -1,5 +1,10 @@
+using Application.Interfaces;
+using Application.Services;
+using Domain.Interfaces;
 using Infrastructure;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Planner.Mappers;
 
 namespace Planner
 {
@@ -11,9 +16,18 @@ namespace Planner
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddAutoMapper(typeof(UserMapper).Assembly);
+
             builder.Services.AddDbContext<DBContext>(options =>
            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddSession();
+            builder.Services.AddHttpContextAccessor();
+
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IReadingTaskRepository, ReadingTaskRepository>();
+            builder.Services.AddScoped<IUserService, UserServices>();
+            builder.Services.AddScoped<IReadingTaskService, ReadingTaskServices>();
 
             var app = builder.Build();
 
@@ -28,13 +42,15 @@ namespace Planner
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession();
+
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=User}/{action=LogInForm}/{id?}");
 
             app.Run();
         }

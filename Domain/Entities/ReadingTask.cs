@@ -1,6 +1,4 @@
-﻿using System.Runtime;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
     public class ReadingTask
     {
