@@ -9,5 +9,18 @@
         public int Pages { get; set; }
 
         public ICollection<ReadingTask> ReadingTasks { get; set; } = new List<ReadingTask>();
+
+        public Book(string title, string author, string image, int pages)
+        {
+            this.Title= title;
+            this.Author= author;
+            this.Image= image;
+            this.Pages= pages;
+        }
+
+        public Book()
+        {
+            
+        }
     }
 }

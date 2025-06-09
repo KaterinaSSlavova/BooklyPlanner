@@ -48,6 +48,12 @@ namespace Planner
 
             app.UseAuthorization();
 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers(); 
+            });
+
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=User}/{action=LogInForm}/{id?}");

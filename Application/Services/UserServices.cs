@@ -31,6 +31,11 @@ namespace Application.Services
             _contextAccessor.HttpContext.Session.SetInt32("UserId", storedUser.Id);
         }
 
+        public User? GetUserByUsername(string username)
+        {
+            return _userRepository.GetUserByUsername(username);
+        }
+
         public string ConvertToString(IFormFile image)
         {
             using (var ms = new MemoryStream())
