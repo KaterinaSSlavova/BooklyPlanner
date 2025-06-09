@@ -21,16 +21,12 @@ namespace Application.Services
 
         public List<ReadingTask>? LoadUserTasks(int userId)
         {
-            List<ReadingTask>? tasks = _taskRepo.GetUserTasks(userId);
-            tasks.ForEach(t => t.Book.Image = GetPicturePath(t));
-            return tasks;
+            return _taskRepo.GetUserTasks(userId);
         }
 
         public ReadingTask? GetTaskById(int taskId)
         {
-            ReadingTask? task = _taskRepo.GetTaskById(taskId);
-            task.Book.Image = GetPicturePath(task);
-            return task;
+            return _taskRepo.GetTaskById(taskId);
         }
 
         public void MarkTaskAsComplete(ReadingTask task)

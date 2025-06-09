@@ -25,10 +25,9 @@ namespace Planner.Controllers
             if (user == null)
                 return BadRequest("User not found!");
 
-            ReadingTask readingTask = new ReadingTask(dto.DueDate, new Book(dto.Title, dto.Author, dto.Image, dto.Pages));
+            ReadingTask readingTask = new ReadingTask(dto.DueDate, new Book(dto.Title, dto.Author, Path.GetFileName(dto.Image), dto.Pages));
             readingTask.UserId = user.Id;
             _readingTaskService.CreateTask(readingTask);
-            HttpContext.Session.SetInt32("UserId", user.Id);
             return Ok(new { message = "Reading task created successfully." });
         }
     }
