@@ -28,7 +28,6 @@ namespace Application.Services
                 throw new ArgumentException($"User with username '{loggingUser.Username}' was not found!");
             if(storedUser.Password != loggingUser.Password)
                 throw new ArgumentException($"Wrong password! Please try again!");
-            _contextAccessor.HttpContext.Session.SetInt32("UserId", storedUser.Id);
         }
 
         public User? GetUserByUsername(string username)

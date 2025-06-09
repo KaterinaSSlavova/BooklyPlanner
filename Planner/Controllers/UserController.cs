@@ -35,7 +35,13 @@ namespace Planner.Controllers
 				User user = _mapper.Map<User>(loggingUser);
 				_userService.LogIn(user);
                 HttpContext.Session.SetString("Username", user.Username);
-				return RedirectToAction("Index", "Home");
+                User? loggedUser = _userService.GetUserByUsername(user.Username);
+                Response.Cookies.Append("UserId", loggedUser.Id.ToString(), new CookieOptions
+                {
+                    HttpOnly = true,
+                    Expires = DateTimeOffset.UtcNow.AddMinutes(30)
+                });
+                return RedirectToAction("Index", "Home");
 			}
             catch (Exception ex)
             {

@@ -24,10 +24,17 @@ namespace Planner.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            int userId = HttpContext.Session.GetInt32("UserId").Value;
-            List<ReadingTask> tasks = _readingTaskService.LoadUserTasks(userId);
-            List<ReadingTaskViewModel> model = _mapper.Map<List<ReadingTaskViewModel>>(tasks);
-            return View(model);
+            string cookie = Request.Cookies["UserId"];
+            if(int.TryParse(cookie, out int userId))
+            {
+                List<ReadingTask> tasks = _readingTaskService.LoadUserTasks(userId);
+                List<ReadingTaskViewModel> model = _mapper.Map<List<ReadingTaskViewModel>>(tasks);
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("LogInForm", "User");
+            }
         }
 
         [HttpGet]
