@@ -1,5 +1,5 @@
 ﻿@{
-    string username = HttpContextAccessor.HttpContext.Session.GetString("Username");
+    string username = Context.Request.Cookies["Username"];
 }
 
 <!DOCTYPE html>

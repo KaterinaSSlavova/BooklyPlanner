@@ -21,13 +21,14 @@ namespace Application.Services
             _userRepository.Register(user); 
         }
 
-        public void LogIn(User loggingUser)
+        public User? LogIn(User loggingUser)
         {
             User? storedUser = _userRepository.GetUserByUsername(loggingUser.Username);
             if (storedUser == null)
                 throw new ArgumentException($"User with username '{loggingUser.Username}' was not found!");
             if(storedUser.Password != loggingUser.Password)
                 throw new ArgumentException($"Wrong password! Please try again!");
+            return storedUser;
         }
 
         public User? GetUserByUsername(string username)

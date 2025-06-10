@@ -33,9 +33,13 @@ namespace Planner.Controllers
             try
             {
 				User user = _mapper.Map<User>(loggingUser);
-				_userService.LogIn(user);
-                HttpContext.Session.SetString("Username", user.Username);
-                User? loggedUser = _userService.GetUserByUsername(user.Username);
+				User? loggedUser = _userService.LogIn(user);
+                Response.Cookies.Append("Username", loggedUser.Username, new CookieOptions
+                {
+                    HttpOnly = true,
+                    Expires = DateTimeOffset.UtcNow.AddDays(1)
+                });
+
                 Response.Cookies.Append("UserId", loggedUser.Id.ToString(), new CookieOptions
                 {
                     HttpOnly = true,

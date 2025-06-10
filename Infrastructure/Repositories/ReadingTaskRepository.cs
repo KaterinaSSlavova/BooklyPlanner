@@ -28,7 +28,9 @@ namespace Infrastructure.Repositories
 
         public ReadingTask? GetTaskById(int taskId)
         {
-            return _context.ReadingTasks.Find(taskId);
+            return _context.ReadingTasks
+                .Include(t => t.Book)
+                .FirstOrDefault(t => t.Id == taskId);
         }
 
         public void UpdateTask(ReadingTask task)

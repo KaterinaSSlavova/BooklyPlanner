@@ -13,12 +13,14 @@ namespace Planner.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IReadingTaskService _readingTaskService;
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
                 
-        public HomeController(ILogger<HomeController> logger, IReadingTaskService readingTaskService, IMapper mapper)
+        public HomeController(ILogger<HomeController> logger, IReadingTaskService readingTaskService, IMapper mapper, IUserService userService)
         {
             _logger = logger;
             _readingTaskService = readingTaskService;
             _mapper = mapper;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -61,10 +63,34 @@ namespace Planner.Controllers
         }
 
         [HttpPost]
-        public IActionResult MarkAsComplete(int id)
+        public async Task<IActionResult> MarkAsComplete(int id)
         {
-            ReadingTask task = _readingTaskService.GetTaskById(id);
+            ReadingTask? task = _readingTaskService.GetTaskById(id);
             _readingTaskService.MarkTaskAsComplete(task);
+
+            PlannerToBooklyDTO dto = new PlannerToBooklyDTO()
+            {
+                Username = Request.Cookies["Username"],
+                Title = task.Book.Title,
+                Author = task.Book.Author,
+                Image = task.Book.Image,
+                Pages = task.Book.Pages
+            };
+            using HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:7268");
+            try
+            {
+                var response = await client.PostAsJsonAsync("/api/books/mark-as-completed", dto);
+                if (!response.IsSuccessStatusCode)
+                {
+                    TempData["Warning"] = "Task was marked as completed but book was not moved to Have Read shelf.";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = $"Bookly connection failed: {ex.Message}";
+            }
+
             return RedirectToAction("Index", "Home");
         }
 
