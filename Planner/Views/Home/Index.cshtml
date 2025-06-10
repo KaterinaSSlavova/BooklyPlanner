@@ -74,7 +74,9 @@
                 @foreach (var task in completedTasks)
                 {
                     <tr>
-                        <td> <img src="@task.Book?.Image" class="card-img-top" alt="@task.Book?.Title" /></td>
+                        <td>
+                            <img src="@task.Book?.Image" class="img-thumbnail" style="max-width: 70px;" alt="@task.Book?.Title" />
+                        </td>
                         <td>@task.Book?.Title</td>
                         <td>@task.DueDate?.ToShortDateString()</td>
                         <td>@task.CreatedAt.ToShortDateString()</td>

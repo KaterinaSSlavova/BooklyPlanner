@@ -85,7 +85,7 @@ namespace Planner.Controllers
 		[HttpPost]
 		public IActionResult LogOut()
 		{
-			HttpContext.Session.Clear();
+            Response.Cookies.Delete("Username");
 			return RedirectToAction("LogInForm", "User");
 		}
 	}
