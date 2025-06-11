@@ -51,7 +51,7 @@ namespace Planner.Controllers
             try
             {
                 ReadingTask task = _mapper.Map<ReadingTask>(model);
-                task.UserId = HttpContext.Session.GetInt32("UserId").Value;
+                task.UserId = int.Parse(Request.Cookies["UserId"]);
                 _readingTaskService.CreateTask(task);
                 return RedirectToAction("Index", "Home");
             }

@@ -10,6 +10,10 @@ namespace Infrastructure
         {
             entity.HasKey(u => u.Id);
 
+            entity.Property(u => u.Username).HasMaxLength(50);
+            entity.Property(u => u.Email).HasMaxLength(50);
+            entity.Property(u => u.Photo).HasMaxLength(200);
+
             entity.HasIndex(u => u.Username).IsUnique();
 
             entity.HasIndex(u => u.Email).IsUnique();

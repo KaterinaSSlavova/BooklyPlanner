@@ -10,6 +10,10 @@ namespace Infrastructure
         {
             entity.HasKey(b => b.Id);
 
+            entity.Property(b => b.Title).HasMaxLength(50);
+            entity.Property(b => b.Author).HasMaxLength(50);
+            entity.Property(b => b.Image).HasMaxLength(200);
+
             entity.HasMany(b => b.ReadingTasks)
                 .WithOne(t => t.Book)
                 .HasForeignKey(b => b.BookId);
