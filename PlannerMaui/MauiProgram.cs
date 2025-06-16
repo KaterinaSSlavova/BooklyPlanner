@@ -15,7 +15,7 @@ namespace PlannerMaui
         {
             var builder = MauiApp.CreateBuilder();
 
-            string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=PlannerDb;Trusted_Connection=True;MultipleActiveResultSets=true";
+            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PlannerDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
             builder.Services.AddDbContext<DBContext>(options =>
                 options.UseSqlServer(connectionString));
 

@@ -2,12 +2,13 @@
 using System.Windows.Input;
 using Application.Interfaces;
 using AutoMapper;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Domain.Entities;
 using Planner.ViewModels;
 
 namespace PlannerMaui.ViewModels
 {
-    public class ActiveTaskViewModel
+    public class ActiveTaskViewModel: ObservableObject
     {
         private readonly IReadingTaskService _taskService;
         private readonly IMapper _mapper;
@@ -40,12 +41,18 @@ namespace PlannerMaui.ViewModels
         {
             ReadingTask? task = _taskService.GetTaskById(Id);
             _taskService.MarkTaskAsComplete(task);
+
+            ReadingTaskViewModel? completedTask = Tasks.FirstOrDefault(t => t.Id == Id);  
+            Tasks.Remove(completedTask);
         } 
 
         public void OnArchiveTask(int Id)
         {
             ReadingTask? task = _taskService.GetTaskById(Id);    
             _taskService.ArchiveTask(task);
+
+            ReadingTaskViewModel? archivedTask = Tasks.FirstOrDefault(t => t.Id == Id);
+            Tasks.Remove(archivedTask);
         }
     }
 }
