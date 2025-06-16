@@ -1,0 +1,12 @@
+{
+    "profiles": {
+        "Windows Machine": {
+            "commandName": "MsixPackage",
+            "nativeDebugging": false
+        }
+    },
+    "AllowedHosts": "*",
+    "ConnectionStrings": {
+        "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=PlannerDb;Trusted_Connection=True;MultipleActiveResultSets=true"
+    }
+}

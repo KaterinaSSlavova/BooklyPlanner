@@ -35,6 +35,7 @@ namespace Infrastructure.Repositories
 
         public void UpdateTask(ReadingTask task)
         {
+
             _context.ReadingTasks.Update(task);
             _context.SaveChanges();
         }
