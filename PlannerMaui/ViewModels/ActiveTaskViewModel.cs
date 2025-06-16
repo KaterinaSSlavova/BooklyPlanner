@@ -20,8 +20,8 @@ namespace PlannerMaui.ViewModels
         {
              _taskService = taskService;
             _mapper = mapper;
-            MarkAsComplete = new Command<ReadingTaskViewModel>(OnMarkAsComplete);
-            ArchiveTask = new Command<ReadingTaskViewModel>(OnArchiveTask);
+            MarkAsComplete = new Command<int>(OnMarkAsComplete);
+            ArchiveTask = new Command<int>(OnArchiveTask);
         }
 
         public async Task LoadActiveTasks()
@@ -36,15 +36,15 @@ namespace PlannerMaui.ViewModels
             }
         }
 
-        public void OnMarkAsComplete(ReadingTaskViewModel model)
+        public void OnMarkAsComplete(int Id)
         {
-            ReadingTask task = _mapper.Map<ReadingTask>(model); 
+            ReadingTask? task = _taskService.GetTaskById(Id);
             _taskService.MarkTaskAsComplete(task);
         } 
 
-        public void OnArchiveTask(ReadingTaskViewModel model)
+        public void OnArchiveTask(int Id)
         {
-            ReadingTask task = _mapper.Map<ReadingTask>(model);
+            ReadingTask? task = _taskService.GetTaskById(Id);    
             _taskService.ArchiveTask(task);
         }
     }

@@ -25,7 +25,7 @@
                             BackgroundColor="Green" 
                             TextColor="White" 
                             Command="{Binding BindingContext.MarkAsComplete, Source={x:Reference TaskPage}}"
-                            CommandParameter="{Binding .}"/>
+                            CommandParameter="{Binding Id}"/>
 
                     <Button Text="Archive" 
                             Grid.Column="3" 
@@ -33,7 +33,7 @@
                             BackgroundColor="Red" 
                             TextColor="White"
                              Command="{Binding BindingContext.ArchiveTask, Source={x:Reference TaskPage}}"
-                             CommandParameter="{Binding .}"/>
+                             CommandParameter="{Binding Id}"/>
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>
