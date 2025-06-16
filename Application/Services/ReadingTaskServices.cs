@@ -14,7 +14,7 @@ namespace Application.Services
 
         public void CreateTask(ReadingTask task)
         {
-            task.Book.Image = GetPicturePath(task);
+            //task.Book.Image = GetPicturePath(task);
             ValidateTask(task);
             _taskRepo.CreateTask(task);
         }

@@ -71,6 +71,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\Dune.jpg" />
+	  <MauiImage Remove="Resources\Images\presi.jpg" />
+	  <MauiImage Remove="Resources\Images\StayAwake.jpg" />
+	  <MauiImage Remove="Resources\Images\theSilentPatient.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Images\Dune.jpg" />
+	  <None Remove="Resources\Images\presi.jpg" />
+	  <None Remove="Resources\Images\StayAwake.jpg" />
+	  <None Remove="Resources\Images\theSilentPatient.jpg" />
 	  <None Remove="Resources\Raw\1984.png" />
 	  <None Remove="Resources\Raw\AtomicHAbits.png" />
 	  <None Remove="Resources\Raw\Dune.jpg" />
@@ -80,6 +91,25 @@
 	  <None Remove="Resources\Raw\TheHobbit.jpg" />
 	  <None Remove="Resources\Raw\ThePackage.jpg" />
 	  <None Remove="Resources\Raw\theSilentPatient.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Resources\Images\dune.jpg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Include="Resources\Images\presi.jpg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Include="Resources\Images\stayawake.jpg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Include="Resources\Images\thesilentpatient.jpg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -104,6 +134,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="LogInPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="CreateNewTaskPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

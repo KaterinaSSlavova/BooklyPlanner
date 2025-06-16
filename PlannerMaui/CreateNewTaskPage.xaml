@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PlannerMaui.ViewModels.CreateNewTaskPage"
+             Title="CreateNewTaskPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Create Reading Task"
+                   FontSize="24"
+                   HorizontalOptions="Center" />
+            
+            <Label Text="Due Date" />
+            <DatePicker Date="{Binding Model.DueDate}" />
+
+            <Label Text="Book Info"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   Margin="0,20,0,0" />
+
+            <Label Text="Title" />
+            <Entry Text="{Binding Model.Book.Title}" Placeholder="Enter book title" />
+
+            <Label Text="Author" />
+            <Entry Text="{Binding Model.Book.Author}" Placeholder="Enter author's name" />
+
+            <Label Text="Image URL or Path" />
+            <Entry Text="{Binding Model.Book.Image}" Placeholder="Image URL or path" />
+
+            <Label Text="Pages" />
+            <Entry Text="{Binding Model.Book.Pages}" 
+                   Keyboard="Numeric"
+                   Placeholder="Number of pages" />
+
+            <Button Text="Create Task"
+                    Command="{Binding CreateTaskCommand}"
+                    BackgroundColor="DodgerBlue"
+                    TextColor="White"
+                    CornerRadius="8"
+                    Padding="10" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

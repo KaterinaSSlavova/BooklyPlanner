@@ -36,6 +36,8 @@ namespace PlannerMaui
             builder.Services.AddTransient<ActiveTaskViewModel>();
             builder.Services.AddTransient<CompletedTaskPage>();
             builder.Services.AddTransient<CompletedTaskViewModel>();
+            builder.Services.AddTransient<CreateNewTaskPage>();
+            builder.Services.AddTransient<CreateReadingTaskViewModel>();
             builder.Services.AddTransient<MainPage>();
 
 #if DEBUG
