@@ -7,14 +7,10 @@ namespace PlannerMaui;
 public partial class ActiveTaskPage : ContentPage
 {
 	private ActiveTaskViewModel _viewModel;
-	private IMapper _mapper;
-	private IReadingTaskService _taskService;
-	public ActiveTaskPage(IReadingTaskService taskService, IMapper mapper)
+	public ActiveTaskPage(ActiveTaskViewModel viewModel)
 	{
 		InitializeComponent();
-		_mapper = mapper;
-		_taskService = taskService;
-		_viewModel = new ActiveTaskViewModel(_taskService, _mapper);
+		_viewModel = viewModel;
 		BindingContext = _viewModel;
 	}
 
