@@ -3,7 +3,6 @@ using Application.Interfaces;
 using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Domain.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Planner.ViewModels;
 
 namespace PlannerMaui.ViewModels

@@ -130,6 +130,9 @@
 		<MauiXaml Update="ActiveTaskPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+		<MauiXaml Update="AppShell.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	  <MauiXaml Update="CompletedTaskPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
