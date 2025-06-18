@@ -10,25 +10,25 @@ namespace PlannerMaui.ViewModels
 {
     public class CompletedTaskViewModel: ObservableObject
     {
-        private readonly IReadingTaskService _taskService;
+        private readonly IApiTaskClient _taskClient;
         private readonly IMapper _mapper;
 
         public ICommand MarkAsComplete { get; }
         public ICommand ArchiveTask { get; }
         public ObservableCollection<ReadingTaskViewModel> Tasks { get; } = new();
 
-        public CompletedTaskViewModel(IReadingTaskService taskService, IMapper mapper)
+        public CompletedTaskViewModel(IApiTaskClient taskClient, IMapper mapper)
         {
-            _taskService = taskService;
+            _taskClient = taskClient;
             _mapper = mapper;
 
-            MarkAsComplete = new Command<int>(OnMarkAsComplete);
-            ArchiveTask = new Command<int>(OnArchiveTask);
+            MarkAsComplete = new Command<int>(async (id) => await OnMarkAsComplete(id));
+            ArchiveTask = new Command<int>(async (id) => await OnArchiveTask(id));
         }
 
         public async Task LoadCompletedTasks()
         {
-            List<ReadingTask>? tasks = await Task.Run(() => _taskService.LoadUserTasks(1));
+            List<ReadingTask>? tasks = await _taskClient.LoadUserTasks(1);
             List<ReadingTaskViewModel> models = _mapper.Map<List<ReadingTaskViewModel>>(tasks);
             Tasks.Clear();
             foreach (var model in models)
@@ -38,19 +38,19 @@ namespace PlannerMaui.ViewModels
             }
         }
 
-        public void OnMarkAsComplete(int Id)
+        public async Task OnMarkAsComplete(int Id)
         {
-            ReadingTask? task = _taskService.GetTaskById(Id);
-            _taskService.MarkTaskAsComplete(task);
+            ReadingTask? task = await _taskClient.GetTaskById(Id);
+            await _taskClient.MarkAsComplete(task);
 
             ReadingTaskViewModel? completedTask = Tasks.FirstOrDefault(t => t.Id == Id);
             Tasks.Remove(completedTask);
         }
 
-        public void OnArchiveTask(int Id)
+        public async Task OnArchiveTask(int Id)
         {
-            ReadingTask? task = _taskService.GetTaskById(Id);
-            _taskService.ArchiveTask(task);
+            ReadingTask? task = await _taskClient.GetTaskById(Id);
+            await _taskClient.ArchiveTask(task);
 
             ReadingTaskViewModel? archivedTask = Tasks.FirstOrDefault(t => t.Id == Id);
             Tasks.Remove(archivedTask);

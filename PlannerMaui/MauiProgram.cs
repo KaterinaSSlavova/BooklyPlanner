@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PlannerMaui.ViewModels;
 using Infrastructure;
+using Infrastructure.ApiClients;
 
 namespace PlannerMaui
 {
@@ -27,6 +28,12 @@ namespace PlannerMaui
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddHttpClient("TaskInternalApi", client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:5001/api/"); ;
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+
             builder.Services.AddAutoMapper(typeof(MauiProgram).Assembly);
             builder.Services.AddTransient<IUserRepository, UserRepository>();
             builder.Services.AddTransient<IReadingTaskRepository, ReadingTaskRepository>();
@@ -38,6 +45,7 @@ namespace PlannerMaui
             builder.Services.AddTransient<CompletedTaskViewModel>();
             builder.Services.AddTransient<CreateNewTaskPage>();
             builder.Services.AddTransient<CreateReadingTaskViewModel>();
+            builder.Services.AddSingleton<IApiTaskClient, ApiTaskClient>();
             builder.Services.AddTransient<MainPage>();
 
 #if DEBUG
