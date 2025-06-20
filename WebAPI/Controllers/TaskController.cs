@@ -17,12 +17,19 @@ namespace API
         [HttpGet("by-id/{taskId}")]
         public IActionResult GetTaskById(int taskId)
         {
-            ReadingTask task = _taskService.GetTaskById(taskId);
-            if (task == null)
+            try
             {
-                return NotFound();
+                ReadingTask task = _taskService.GetTaskById(taskId);
+                if (task == null)
+                {
+                    return NotFound();
+                }
+                return Ok(task);
             }
-            return Ok(task);
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
 
@@ -43,24 +50,45 @@ namespace API
         [HttpGet("by-user/{userId}")]
         public IActionResult LoadUserTasks(int userId)
         {
-            List<ReadingTask>? tasks = _taskService.LoadUserTasks(userId);
-            if(tasks.Count <= 0)
-                return NotFound();
-            return Ok(tasks);
+            try
+            {
+                List<ReadingTask>? tasks = _taskService.LoadUserTasks(userId);
+                if (tasks.Count <= 0)
+                    return NotFound();
+                return Ok(tasks);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("mark-as-complete")]
         public IActionResult MarkTaskAsComplete(ReadingTask task)
         {
-            _taskService.MarkTaskAsComplete(task);
-            return Ok(task);
+            try
+            {
+                _taskService.MarkTaskAsComplete(task);
+                return Ok(task);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("archive-task")]
         public IActionResult ArchiveTask(ReadingTask task)
         {
-            _taskService.ArchiveTask(task);
-            return Ok(task);
+            try
+            {
+                _taskService.ArchiveTask(task);
+                return Ok(task);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

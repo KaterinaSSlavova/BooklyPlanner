@@ -8,11 +8,9 @@ namespace Application.Services
     public class UserServices: IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IHttpContextAccessor _contextAccessor;
-        public UserServices(IUserRepository userRepository, IHttpContextAccessor httpContext)
+        public UserServices(IUserRepository userRepository)
         {
              _userRepository = userRepository;
-            _contextAccessor = httpContext;
         }
 
         public void Register(User user)

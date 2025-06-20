@@ -6,8 +6,8 @@ namespace Application.Interfaces
     {
         Task<List<ReadingTask>?> LoadUserTasks(int userId);
         Task<ReadingTask?> GetTaskById(int taskId);
-        Task<bool> CreateTask(ReadingTask task);
-        Task<bool> MarkAsComplete(ReadingTask task);
-        Task<bool> ArchiveTask(ReadingTask task);
+        Task CreateTask(ReadingTask task);
+        Task MarkAsComplete(ReadingTask task);
+        Task ArchiveTask(ReadingTask task);
     }
 }

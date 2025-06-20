@@ -1,3 +1,10 @@
+using Application.Interfaces;
+using Application.Services;
+using Domain.Interfaces;
+using Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Infrastructure;
+
 namespace WebAPI
 {
     public class Program
@@ -8,10 +15,24 @@ namespace WebAPI
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                 .AddJsonOptions(options =>
+                 {
+                     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+                 }); 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<DBContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IReadingTaskRepository, ReadingTaskRepository>();
+            builder.Services.AddScoped<IUserService, UserServices>();
+            builder.Services.AddScoped<IReadingTaskService, ReadingTaskServices>();
 
             var app = builder.Build();
 

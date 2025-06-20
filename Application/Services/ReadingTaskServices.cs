@@ -26,6 +26,9 @@ namespace Application.Services
 
         public ReadingTask? GetTaskById(int taskId)
         {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine($"I'm requesting task with id {taskId}");
+            Console.ForegroundColor = ConsoleColor.White;
             return _taskRepo.GetTaskById(taskId);
         }
 
