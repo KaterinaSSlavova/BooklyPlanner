@@ -30,9 +30,10 @@ namespace PlannerMaui
 
             builder.Services.AddHttpClient("TaskInternalApi", client =>
             {
-                client.BaseAddress = new Uri("https://localhost:5001/api/"); ;
+                client.BaseAddress = new Uri("http://localhost:5148/");
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
             });
+
 
             builder.Services.AddAutoMapper(typeof(MauiProgram).Assembly);
             builder.Services.AddTransient<IUserRepository, UserRepository>();
@@ -47,6 +48,7 @@ namespace PlannerMaui
             builder.Services.AddTransient<CreateReadingTaskViewModel>();
             builder.Services.AddSingleton<IApiTaskClient, ApiTaskClient>();
             builder.Services.AddTransient<MainPage>();
+
 
 #if DEBUG
             builder.Logging.AddDebug();

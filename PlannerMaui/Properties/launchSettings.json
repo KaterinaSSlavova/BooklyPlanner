@@ -1,8 +1,10 @@
 {
     "profiles": {
-        "Windows Machine": {
+        "PlannerMaui (Msix)": {
             "commandName": "MsixPackage",
-            "nativeDebugging": false
+            "environmentVariables": {
+                "DOTNET_ENVIRONMENT": "Development"
+            }
         }
     }
 }

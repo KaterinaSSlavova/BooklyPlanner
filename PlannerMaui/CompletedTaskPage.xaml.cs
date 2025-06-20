@@ -1,5 +1,3 @@
-using Application.Interfaces;
-using AutoMapper;
 using PlannerMaui.ViewModels;
 
 namespace PlannerMaui;

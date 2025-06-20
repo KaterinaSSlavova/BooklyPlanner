@@ -9,7 +9,7 @@ namespace PlannerMaui.ViewModels
 {
     public class CreateReadingTaskViewModel: ObservableObject
     {
-        private readonly IReadingTaskService _taskService;
+        private readonly IApiTaskClient _taskClient;
         private readonly IMapper _mapper;
         public CreateTaskViewModel Model { get; set; } = new CreateTaskViewModel
         {
@@ -17,9 +17,9 @@ namespace PlannerMaui.ViewModels
         };
         public ICommand CreateTaskCommand { get; }
 
-        public CreateReadingTaskViewModel(IReadingTaskService taskService, IMapper mapper)
+        public CreateReadingTaskViewModel(IApiTaskClient taskClient, IMapper mapper)
         {
-            _taskService = taskService;
+            _taskClient = taskClient;
             _mapper = mapper;
             CreateTaskCommand = new Command(OnCreateTask);
         }
@@ -28,7 +28,7 @@ namespace PlannerMaui.ViewModels
         {
             ReadingTask task = _mapper.Map<ReadingTask>(Model);
             task.UserId = 1;
-            _taskService.CreateTask(task);
+            _taskClient.CreateTask(task);
 
             Model = new CreateTaskViewModel { Book = new BookViewModel() };
             OnPropertyChanged(nameof(Model));
