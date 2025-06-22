@@ -1,11 +1,11 @@
 ﻿using System.Text;
 using System.Text.Json;
-using Domain.Entities;
 using Application.Interfaces;
+using Domain.Entities;
 
 namespace Infrastructure.ApiClients
 {
-    public class ApiTaskClient: IApiTaskClient
+    public class ApiTaskClient : IApiTaskClient
     {
         private readonly HttpClient _client;
         private readonly JsonSerializerOptions _options;
@@ -19,21 +19,22 @@ namespace Infrastructure.ApiClients
         public async Task<ReadingTask?> GetTaskById(int taskId)
         {
             var response = await _client.GetAsync($"api/tasks/by-id/{taskId}");
-            if(!response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
                 throw new ArgumentException("API error when loading task by id.");
 
-            string json = await response.Content.ReadAsStringAsync();   
-            return JsonSerializer.Deserialize<ReadingTask>(json, _options);   
+            string json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<ReadingTask>(json, _options);
         }
 
         public async Task<List<ReadingTask>?> LoadUserTasks(int userId)
         {
+
             var response = await _client.GetAsync($"api/tasks/by-user/{userId}");
-            if (!response.IsSuccessStatusCode) 
+            if (!response.IsSuccessStatusCode)
                 throw new ArgumentException("API error when loading user tasks.");
 
             string json = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<List<ReadingTask>>(json, _options) ?? new List<ReadingTask>();
+            return JsonSerializer.Deserialize<List<ReadingTask>>(json, _options);
         }
 
         public async Task CreateTask(ReadingTask task)

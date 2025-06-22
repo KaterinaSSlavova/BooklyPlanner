@@ -21,7 +21,7 @@ namespace PlannerMaui
 
             builder.Services.AddHttpClient("TaskInternalApi", client =>
             {
-                client.BaseAddress = new Uri("http://localhost:7166/");
+                client.BaseAddress = new Uri("https://localhost:7166/");
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
             });
 

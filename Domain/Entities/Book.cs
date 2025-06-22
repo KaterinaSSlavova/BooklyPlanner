@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace Domain.Entities
 {
     public class Book
     {
@@ -8,6 +10,7 @@
         public string? Image { get; set; }
         public int Pages { get; set; }
 
+        [JsonIgnore]
         public ICollection<ReadingTask> ReadingTasks { get; set; } = new List<ReadingTask>();
 
         public Book(string title, string author, string image, int pages)
