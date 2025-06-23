@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using PlannerMaui.ViewModels;
 
 namespace PlannerMaui;
@@ -17,8 +16,6 @@ public partial class ActiveTaskPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await _viewModel.LoadActiveTasks();
-
         shouldRefresh = true;
         Refresh();
     }
@@ -34,7 +31,6 @@ public partial class ActiveTaskPage : ContentPage
         while (shouldRefresh)
         {
             await MainThread.InvokeOnMainThreadAsync(() => _viewModel.LoadActiveTasks());
-
             await Task.Delay(TimeSpan.FromSeconds(1));
         }
     }
