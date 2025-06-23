@@ -30,6 +30,9 @@ namespace Infrastructure.ApiClients
         {
 
             var response = await _client.GetAsync($"api/tasks/by-user/{userId}");
+            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                return new List<ReadingTask>();
+
             if (!response.IsSuccessStatusCode)
                 throw new ArgumentException("API error when loading user tasks.");
 

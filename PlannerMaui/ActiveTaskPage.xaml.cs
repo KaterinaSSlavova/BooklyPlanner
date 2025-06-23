@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using PlannerMaui.ViewModels;
 
 namespace PlannerMaui;
@@ -5,8 +6,7 @@ namespace PlannerMaui;
 public partial class ActiveTaskPage : ContentPage
 {
 	private ActiveTaskViewModel _viewModel;
-    private bool _isPolling = false;
-    private CancellationTokenSource _pollingTokenSource;
+    private bool shouldRefresh = false;
     public ActiveTaskPage(ActiveTaskViewModel viewModel)
 	{
 		InitializeComponent();
@@ -18,37 +18,24 @@ public partial class ActiveTaskPage : ContentPage
     {
         base.OnAppearing();
         await _viewModel.LoadActiveTasks();
-        StartPolling();
+
+        shouldRefresh = true;
+        Refresh();
     }
 
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
-        StopPolling();
+        shouldRefresh = false;
     }
 
-    private void StartPolling()
+    private async Task Refresh()
     {
-        if (_isPolling) return;
-
-        _isPolling = true;
-        _pollingTokenSource = new CancellationTokenSource();
-
-        Task.Run(async () =>
+        while (shouldRefresh)
         {
-            while (!_pollingTokenSource.IsCancellationRequested)
-            {
-                await MainThread.InvokeOnMainThreadAsync(() => _viewModel.LoadActiveTasks());
-              
-                await Task.Delay(TimeSpan.FromSeconds(10));
-            }
-        }, _pollingTokenSource.Token);
-    }
+            await MainThread.InvokeOnMainThreadAsync(() => _viewModel.LoadActiveTasks());
 
-    private void StopPolling()
-    {
-        _isPolling = false;
-        _pollingTokenSource?.Cancel();
+            await Task.Delay(TimeSpan.FromSeconds(1));
+        }
     }
-
 }

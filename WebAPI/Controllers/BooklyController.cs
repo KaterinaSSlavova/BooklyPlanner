@@ -18,23 +18,15 @@ namespace WebAPI.Controllers
         [HttpPost("from-bookly")]
         public async Task<IActionResult> CreateTask([FromBody] BooklyToPlanner dto)
         {
-            try
-            {
                 if (dto == null)
                 {
                     return BadRequest("Invalid input");
                 }
 
-                ReadingTask task = new ReadingTask(dto.DueDate, new Book(dto.Title, dto.Author, dto.Image, dto.Pages));
+                ReadingTask task = new ReadingTask(dto.DueDate, new Book(dto.Title, dto.Author, Path.GetFileName(dto.Image), dto.Pages));
                 task.UserId = 1;
                 await _taskClient.CreateTask(task);
                 return Ok(task);
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine("EXCEPTION: " + ex.Message);
-                return BadRequest(ex.Message);
-            }
         }
     }
 }

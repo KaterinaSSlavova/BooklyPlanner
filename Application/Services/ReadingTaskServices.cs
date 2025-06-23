@@ -15,6 +15,7 @@ namespace Application.Services
         public void CreateTask(ReadingTask task)
         {
             ValidateTask(task);
+            task.Book.Image.ToLower();
             _taskRepo.CreateTask(task);
         }
 

@@ -54,7 +54,7 @@ namespace API
             {
                 List<ReadingTask>? tasks = _taskService.LoadUserTasks(userId);
                 if (tasks.Count <= 0)
-                    return NotFound();
+                    return NoContent();
                 return Ok(tasks);
             }
             catch (ArgumentException ex)
