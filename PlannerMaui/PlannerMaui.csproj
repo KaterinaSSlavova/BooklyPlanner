@@ -51,6 +51,22 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+		<MauiImage Update="Resources\Images\dune.jpg">
+		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\presi.jpg">
+		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\stayawake.jpg">
+		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\thesilentpatient.jpg">
+		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</MauiImage>
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -72,13 +88,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Remove="Resources\Images\Dune.jpg" />
-	  <MauiImage Remove="Resources\Images\presi.jpg" />
-	  <MauiImage Remove="Resources\Images\StayAwake.jpg" />
-	  <MauiImage Remove="Resources\Images\theSilentPatient.jpg" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Remove="Resources\Images\Dune.jpg" />
 	  <None Remove="Resources\Images\presi.jpg" />
 	  <None Remove="Resources\Images\StayAwake.jpg" />
@@ -92,25 +101,6 @@
 	  <None Remove="Resources\Raw\TheHobbit.jpg" />
 	  <None Remove="Resources\Raw\ThePackage.jpg" />
 	  <None Remove="Resources\Raw\theSilentPatient.jpg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Include="Resources\Images\dune.jpg">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="Resources\Images\presi.jpg">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="Resources\Images\stayawake.jpg">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="Resources\Images\thesilentpatient.jpg">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>

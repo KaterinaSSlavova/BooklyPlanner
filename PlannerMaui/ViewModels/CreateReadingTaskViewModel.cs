@@ -21,14 +21,14 @@ namespace PlannerMaui.ViewModels
         {
             _taskClient = taskClient;
             _mapper = mapper;
-            CreateTaskCommand = new Command(OnCreateTask);
+            CreateTaskCommand = new Command(async () => await OnCreateTask());
         }
 
-        public void OnCreateTask()
+        public async Task OnCreateTask()
         {
             ReadingTask task = _mapper.Map<ReadingTask>(Model);
             task.UserId = 1;
-            _taskClient.CreateTask(task);
+            await _taskClient.CreateTask(task);
 
             Model = new CreateTaskViewModel { Book = new BookViewModel() };
             OnPropertyChanged(nameof(Model));

@@ -11,7 +11,7 @@
                 <Grid Padding="10" ColumnDefinitions="70,*,Auto,Auto" RowDefinitions="Auto">
                     
                     <Image Source="{Binding Book.Image}" 
-                           HeightRequest="60" WidthRequest="60" Aspect="AspectFill"
+                           HeightRequest="90" WidthRequest="70" Aspect="AspectFit"
                            Grid.Column="0" />
                     
                     <StackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
