@@ -9,11 +9,10 @@
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Grid Padding="10" ColumnDefinitions="70,*,Auto,Auto" RowDefinitions="Auto">
-                    
                     <Image Source="{Binding Book.Image}" 
                            HeightRequest="90" WidthRequest="70" Aspect="AspectFit"
                            Grid.Column="0" />
-                    
+
                     <StackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
                         <Label Text="{Binding Book.Title}" FontAttributes="Bold" />
                         <Label Text="{Binding DueDate, StringFormat='Due: {0:MM/dd/yyyy}'}" FontSize="Small" />
@@ -38,4 +37,5 @@
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
+
 </ContentPage>

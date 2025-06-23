@@ -2,6 +2,7 @@ using Application.Interfaces;
 using Application.Services;
 using Domain.Interfaces;
 using Infrastructure;
+using Infrastructure.ApiClients;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +31,12 @@ namespace WebAPI
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            builder.Services.AddHttpClient("TaskInternalApi", client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7166");
+            });
+            builder.Services.AddScoped<IApiTaskClient, ApiTaskClient>();
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IReadingTaskRepository, ReadingTaskRepository>();

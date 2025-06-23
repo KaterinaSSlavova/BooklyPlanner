@@ -5,6 +5,7 @@ using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Domain.Entities;
 using Planner.ViewModels;
+using System.Linq;
 
 namespace PlannerMaui.ViewModels
 {
@@ -15,6 +16,7 @@ namespace PlannerMaui.ViewModels
 
         public ICommand MarkAsComplete { get; }
         public ICommand ArchiveTask { get; }
+
         public ObservableCollection<ReadingTaskViewModel> Tasks { get; } = new();
 
         public ActiveTaskViewModel(IMapper mapper, IApiTaskClient taskClient)
@@ -28,12 +30,19 @@ namespace PlannerMaui.ViewModels
         public async Task LoadActiveTasks()
         {
             List<ReadingTask>? tasks = await _taskClient.LoadUserTasks(1);
-            List<ReadingTaskViewModel> models = _mapper.Map<List<ReadingTaskViewModel>>(tasks);
-            Tasks.Clear();
-            foreach (var model in models)
+            var newTasks = tasks.Where(t => !t.IsCompleted).ToList();
+            var newIds = newTasks.Select(t => t.Id).OrderBy(id => id);
+            var currentIds = Tasks.Select(t => t.Id).OrderBy(id => id);
+
+            if (!newIds.SequenceEqual(currentIds))
             {
-                if (!model.IsCompleted)
-                    Tasks.Add(model);
+                List<ReadingTaskViewModel> models = _mapper.Map<List<ReadingTaskViewModel>>(tasks);
+                Tasks.Clear();
+                foreach (var model in models)
+                {
+                    if (!model.IsCompleted)
+                        Tasks.Add(model);
+                }
             }
         }
 

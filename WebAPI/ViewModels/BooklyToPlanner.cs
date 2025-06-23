@@ -1,4 +1,4 @@
-﻿namespace Planner.ViewModels
+﻿namespace ViewModels
 {
     public class BooklyToPlanner
     {
